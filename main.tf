@@ -78,7 +78,7 @@ EOF
 
 resource "aws_ecs_service" "this" {
   name            = var.task_name
-  cluster         = aws_ecs_cluster.this[count.index].id
+  cluster         = aws_ecs_cluster.this[0].id
   task_definition = aws_ecs_task_definition.this.arn
 
   desired_count = 1
