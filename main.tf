@@ -27,15 +27,16 @@ resource "aws_ecs_cluster" "this" {
 
 
 resource "aws_ecs_task_definition" "this" {
-  family = "this"
+  family = var.task_name
+  network_mode = var.network_mode
 
+  cpu = var.task_cpu
+  memory = var.memory
   container_definitions = <<EOF
 [
   {
     "name": "${var.task_name}",
-    "image": "${var.image_name}",
-    "cpu": ${var.task_cpu},
-    "memory": ${var.task_memory},
+    "image": "${var.image_name}"
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
       "options": {
@@ -47,4 +48,6 @@ resource "aws_ecs_task_definition" "this" {
   }
 ]
 EOF
+
+  tags = var.tags
 }

@@ -79,3 +79,9 @@ variable "log_stream_prefix" {
   type        = string
   default     = ""
 }
+
+variable "network_mode" {
+  description = "Log Stream prefic used for logging to CloudWatch"
+  type        = string
+  default     = "awsvpc"
+}
