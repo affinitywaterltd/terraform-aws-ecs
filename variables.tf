@@ -199,3 +199,27 @@ variable "startTimeout" {
   type        = string
   default     = "null"
 }
+
+
+
+#####
+## ECS Service
+#####
+variable "subnets" {
+  description = "The subnets associated with the task or service"
+  type        = list(string)
+  default     = []
+}
+
+variable "security_groups" {
+  description = "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used."
+  type        = list(string)
+  default     = []
+}
+
+
+variable "assign_public_ip" {
+  description = "Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false."
+  type        = string
+  default     = false
+}
