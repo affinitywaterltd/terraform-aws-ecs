@@ -46,6 +46,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "cloudwatch_retention_in_days" {
+  description = "Retention Period for the loadwatch log group"
+  type        = string
+  default     = 180
+}
+
 
 #####
 ## ECS Task Definition
