@@ -31,7 +31,7 @@ resource "aws_ecs_task_definition" "this" {
   network_mode = var.network_mode
 
   cpu = var.task_cpu
-  memory = var.memory
+  memory = var.task_memory
   container_definitions = <<EOF
 [
   {
