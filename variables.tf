@@ -39,3 +39,43 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+
+#####
+## ECS Task Definition
+#####
+variable "task_name" {
+  description = "Name to be used for the ECS Task Definition"
+  type        = string
+  default     = null
+}
+
+variable "task_cpu" {
+  description = "The vCPU specification for the ECS Task Definition"
+  type        = string
+  default     = 0
+}
+
+variable "task_memory" {
+  description = "The memory specification for the ECS Task Definition"
+  type        = string
+  default     = 128
+}
+
+variable "image_name" {
+  description = "Name of the image to be used for the ECS Task Definition"
+  type        = string
+  default     = null
+}
+
+variable "log_driver" {
+  description = "Task log driver (Default: awslogs)"
+  type        = string
+  default     = "awslogs"
+}
+
+variable "log_stream_prefix" {
+  description = "Log Stream prefic used for logging to CloudWatch"
+  type        = string
+  default     = ""
+}

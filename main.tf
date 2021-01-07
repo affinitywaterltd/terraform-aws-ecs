@@ -23,3 +23,28 @@ resource "aws_ecs_cluster" "this" {
 
   tags = var.tags
 }
+
+
+
+resource "aws_ecs_task_definition" "this" {
+  family = "this"
+
+  container_definitions = <<EOF
+[
+  {
+    "name": "${var.task_name}",
+    "image": "${var.image_name}",
+    "cpu": ${var.task_cpu},
+    "memory": ${var.task_memory},
+    "logConfiguration": {
+      "logDriver": "${var.log_driver}",
+      "options": {
+        "awslogs-region": "eu-west-1",
+        "awslogs-group": "/aws/ecs/tasks/${var.task_name}",
+        "awslogs-stream-prefix": "${var.log_stream_prefix}"
+      }
+    }
+  }
+]
+EOF
+}
