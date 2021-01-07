@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "this" {
       "options": {
         "awslogs-region": "eu-west-1",
         "awslogs-group": "/aws/ecs/tasks/${var.task_name}",
-        "awslogs-stream-prefix": "${var.log_stream_prefix}"
+        "awslogs-stream-prefix": "${var.task_name}"
       }
     }
   }
