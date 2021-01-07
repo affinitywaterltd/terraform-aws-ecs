@@ -96,4 +96,10 @@ resource "aws_ecs_service" "this" {
     security_groups = var.security_groups
     assign_public_ip = var.assign_public_ip
   }
+
+  load_balancer {
+    target_grouup_arn = aws_lb_target_group.this.arn
+    container_name = var.task_name
+    container_port = 5000
+  }
 }
