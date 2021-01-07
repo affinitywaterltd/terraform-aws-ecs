@@ -7,6 +7,7 @@ resource "aws_lb_target_group" "this" {
   name     = var.task_name
   port     = 5000
   protocol = "HTTP"
+  target_type = "ip"
   vpc_id   = data.aws_subnet.this.vpc_id
 
   stickiness {
