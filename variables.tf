@@ -53,7 +53,7 @@ variable "task_name" {
 variable "task_cpu" {
   description = "The vCPU specification for the ECS Task Definition"
   type        = string
-  default     = 0
+  default     = 1024
 }
 
 variable "task_memory" {
@@ -84,4 +84,112 @@ variable "network_mode" {
   description = "Log Stream prefic used for logging to CloudWatch"
   type        = string
   default     = "awsvpc"
+}
+
+variable "dnsSearchDomains" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "environmentFiles" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "secretOptions" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "entryPoint" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "portMappings" {
+  description = "Set value within containerDefinitions"
+  type        = list
+  default     = []
+}
+
+variable "command" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "linuxParameters" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "environment" {
+  description = "Set value within containerDefinitions"
+  type        = list
+  default     = []
+}
+
+variable "resourceRequirements" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "ulimits" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "dnsServers" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "mountPoints" {
+  description = "Set value within containerDefinitions"
+  type        = list
+  default     = []
+}
+
+variable "workingDirectory" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "secrets" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "dockerSecurityOptions" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "volumesFrom" {
+  description = "Set value within containerDefinitions"
+  type        = list
+  default     = []
+}
+
+variable "stopTimeout" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
+}
+
+variable "startTimeout" {
+  description = "Set value within containerDefinitions"
+  type        = string
+  default     = null
 }
