@@ -29,12 +29,16 @@ resource "aws_ecs_cluster" "this" {
 resource "aws_ecs_task_definition" "this" {
   family = var.task_name
   network_mode = var.network_mode
+  requires_compatibilities = var.requires_compatibilities
 
+  
   cpu = var.task_cpu
   memory = var.task_memory
   container_definitions = <<EOF
 [
   {
+    "cpu": ${var.task_cpu},
+    "memory": ${var.task_memory},
     "dnsSearchDomains": ${var.dnsSearchDomains},
     "environmentFiles": ${var.environmentFiles},
     "secretOptions": ${var.secretOptions},

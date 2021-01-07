@@ -34,6 +34,12 @@ variable "container_insights" {
   default     = true
 }
 
+variable "requires_compatibilities" {
+  description = "A set of launch types required by the task. The valid values are EC2 and FARGATE"
+  type        = string
+  default     = "FARGATE"
+}
+
 variable "tags" {
   description = "A map of tags to add to ECS Cluster"
   type        = map(string)
