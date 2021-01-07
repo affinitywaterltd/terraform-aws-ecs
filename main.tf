@@ -27,6 +27,8 @@ resource "aws_ecs_cluster" "this" {
 
 
 resource "aws_ecs_task_definition" "this" {
+  count = var.create_ecs ? 1 : 0
+
   family = var.task_name
   network_mode = var.network_mode
   requires_compatibilities = var.requires_compatibilities
@@ -77,9 +79,11 @@ EOF
 }
 
 resource "aws_ecs_service" "this" {
+  count = var.create_ecs ? 1 : 0
+
   name            = var.task_name
-  cluster         = aws_ecs_cluster.this[0].id
-  task_definition = aws_ecs_task_definition.this.arn
+  cluster         = aws_ecs_cluster.this[count.index].id
+  task_definition = aws_ecs_task_definition.this[count.index].arn
 
   desired_count = 1
 
