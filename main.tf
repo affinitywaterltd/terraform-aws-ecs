@@ -84,6 +84,7 @@ resource "aws_ecs_service" "this" {
   name            = var.task_name
   cluster         = aws_ecs_cluster.this[count.index].id
   task_definition = aws_ecs_task_definition.this[count.index].arn
+  launch_type     = var.launch_type
 
   desired_count = 1
 

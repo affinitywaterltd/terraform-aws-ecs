@@ -217,9 +217,14 @@ variable "security_groups" {
   default     = []
 }
 
-
 variable "assign_public_ip" {
   description = "Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false."
   type        = string
   default     = false
+}
+
+variable "launch_type" {
+  description = "The launch type on which to run your service. The valid values are EC2 and FARGATE. Defaults to EC2."
+  type        = string
+  default     = "FARGATE"
 }
