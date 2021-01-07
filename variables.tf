@@ -36,8 +36,8 @@ variable "container_insights" {
 
 variable "requires_compatibilities" {
   description = "A set of launch types required by the task. The valid values are EC2 and FARGATE"
-  type        = string
-  default     = "FARGATE"
+  type        = list(string)
+  default     = ["FARGATE"]
 }
 
 variable "tags" {
