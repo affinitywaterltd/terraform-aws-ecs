@@ -32,7 +32,8 @@ resource "aws_ecs_task_definition" "this" {
   requires_compatibilities = var.requires_compatibilities
 
   task_role_arn = aws_iam_role.this.arn
-
+  execution_role_arn = aws_iam_role.this.arn
+  
   cpu = var.task_cpu
   memory = var.task_memory
   container_definitions = <<EOF
