@@ -89,107 +89,107 @@ variable "network_mode" {
 variable "dnsSearchDomains" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "environmentFiles" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "secretOptions" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "entryPoint" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "portMappings" {
   description = "Set value within containerDefinitions"
-  type        = list
-  default     = []
+  type        = string
+  default     = "[]"
 }
 
 variable "command" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "linuxParameters" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "environment" {
   description = "Set value within containerDefinitions"
-  type        = list
-  default     = []
+  type        = string
+  default     = "[]"
 }
 
 variable "resourceRequirements" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "ulimits" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "dnsServers" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "mountPoints" {
   description = "Set value within containerDefinitions"
-  type        = list
-  default     = []
+  type        = string
+  default     = "[]"
 }
 
 variable "workingDirectory" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "secrets" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "dockerSecurityOptions" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "volumesFrom" {
   description = "Set value within containerDefinitions"
-  type        = list
-  default     = []
+  type        = string
+  default     = "[]"
 }
 
 variable "stopTimeout" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "startTimeout" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = null
+  default     = "null"
 }
