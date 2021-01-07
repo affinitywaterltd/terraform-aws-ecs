@@ -98,7 +98,7 @@ resource "aws_ecs_service" "this" {
   }
 
   load_balancer {
-    target_grouup_arn = aws_lb_target_group.this[count.index].arn
+    target_group_arn = aws_lb_target_group.this[count.index].arn
     container_name = var.task_name
     container_port = 5000
   }
