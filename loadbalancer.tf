@@ -1,9 +1,13 @@
+data "aws_subnet" "this" {
+  id = var.subnets[0]
+}
+
 resource "aws_lb_target_group" "this" {
   count = var.create_lb_target_group ? 1 : 0
   name     = var.task_name
   port     = 5000
   protocol = "HTTP"
-  vpc_id   = local.vpc_id
+  vpc_id   = data.aws_subnet.this.vpc_id
 
   stickiness {
     type            = "lb_cookie"
