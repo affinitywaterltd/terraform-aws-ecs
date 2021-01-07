@@ -59,13 +59,13 @@ variable "task_name" {
 variable "task_cpu" {
   description = "The vCPU specification for the ECS Task Definition"
   type        = string
-  default     = 1024
+  default     = 256
 }
 
 variable "task_memory" {
   description = "The memory specification for the ECS Task Definition"
   type        = string
-  default     = 128
+  default     = 512
 }
 
 variable "image_name" {
