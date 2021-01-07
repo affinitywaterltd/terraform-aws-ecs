@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "this" {
 
   task_role_arn = aws_iam_role.this.arn
   execution_role_arn = aws_iam_role.this.arn
-  
+
   cpu = var.task_cpu
   memory = var.task_memory
   container_definitions = <<EOF
@@ -74,4 +74,15 @@ resource "aws_ecs_task_definition" "this" {
 EOF
 
   tags = var.tags
+}
+
+resource "aws_ecs_service" "this" {
+  name            = var.task_name
+  cluster         = aws_ecs_cluster.this.id
+  task_definition = aws_ecs_task_definition.this.arn
+
+  desired_count = 1
+
+  deployment_maximum_percent         = 100
+  deployment_minimum_healthy_percent = 0
 }
