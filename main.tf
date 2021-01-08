@@ -61,13 +61,13 @@ resource "aws_ecs_task_definition" "this" {
     "volumesFrom": ${var.volumesFrom},
     "stopTimeout": ${var.stopTimeout},
     "startTimeout": ${var.startTimeout},
-    "name": "${var.task_name}",
+    "name": "${var.task_name}-${var.environment_name}",
     "image": "${var.image_name}",
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
       "options": {
         "awslogs-region": "eu-west-1",
-        "awslogs-group": "/aws/ecs/tasks/${var.task_name}",
+        "awslogs-group": "/aws/ecs/tasks/${var.task_name}-${var.environment_name}",
         "awslogs-stream-prefix": "${var.task_name}"
       }
     }
