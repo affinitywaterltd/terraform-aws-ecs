@@ -22,6 +22,12 @@ variable "enable_spot" {
   default     = true
 }
 
+variable "enable_autoscaling" {
+  description = "Controls if an app autoscaling policy is created"
+  type        = bool
+  default     = true
+}
+
 variable "create_lb_target_group" {
   description = "Controls if a Load Balancer Target Group is created"
   type        = bool
