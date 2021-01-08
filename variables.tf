@@ -10,6 +10,12 @@ variable "name" {
   default     = null
 }
 
+variable "environment_name" {
+  description = "Name of the environment (e.g. dev, demo, prod)"
+  type        = string
+  default     = null
+}
+
 variable "enable_spot" {
   description = "Controls if capacity Provider includes SPOT instances"
   type        = bool
@@ -22,6 +28,11 @@ variable "create_lb_target_group" {
   default     = true
 }
 
+variable "create_iam_role" {
+  description = "Controls if an IAM role is created"
+  type        = bool
+  default     = true
+}
 
 variable "capacity_providers" {
   description = "List of short names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT."
@@ -240,4 +251,58 @@ variable "launch_type" {
   description = "The launch type on which to run your service. The valid values are EC2 and FARGATE. Defaults to EC2."
   type        = string
   default     = "FARGATE"
+}
+
+variable "desired_count" {
+  description = "The number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy."
+  type        = string
+  default     = "0"
+}
+
+variable "deployment_maximum_percent" {
+  description = "The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy."
+  type        = string
+  default     = "100"
+}
+
+variable "deployment_minimum_healthy_percent" {
+  description = "The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment."
+  type        = string
+  default     = "0"
+}
+
+variable "enable_ecs_managed_tags" {
+  description = "Specifies whether to enable Amazon ECS managed tags for the tasks within the service."
+  type        = bool
+  default     = true
+}
+
+variable "force_new_deployment" {
+  description = "Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g. myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates."
+  type        = bool
+  default     = false
+}
+
+variable "health_check_grace_period_seconds" {
+  description = "Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 2147483647. Only valid for services configured to use load balancers."
+  type        = string
+  default     = "30"
+}
+
+variable "iam_role" {
+  description = "ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the awsvpc network mode. If using awsvpc network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here."
+  type        = string
+  default     = null
+}
+
+variable "container_port" {
+  description = "The port on the container to associate with the load balancer."
+  type        = string
+  default     = "5000"
+}
+
+variable "platform_version" {
+  description = "The platform version on which to run your service. Only applicable for launch_type set to FARGATE. Defaults to LATEST"
+  type        = string
+  default     = "LATEST"
 }

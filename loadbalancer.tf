@@ -4,8 +4,8 @@ data "aws_subnet" "this" {
 
 resource "aws_lb_target_group" "this" {
   count = var.create_lb_target_group ? 1 : 0
-  name     = var.task_name
-  port     = 5000
+  name     = "${var.task_name}-${var.environment_name}"
+  port     = var.container_port
   protocol = "HTTP"
   target_type = "ip"
   vpc_id   = data.aws_subnet.this.vpc_id
@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "this" {
   health_check {
     path                = "/"
     protocol            = "HTTP"
-    port                = 5000
+    port                = var.container_port
     healthy_threshold   = 3
     unhealthy_threshold = 3
     interval            = 30

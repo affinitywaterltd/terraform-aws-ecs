@@ -1,7 +1,7 @@
 resource "aws_ecs_cluster" "this" {
   count = var.create_ecs ? 1 : 0
 
-  name = var.name
+  name = "${var.name}-${var.environment_name}"
 
   capacity_providers = var.capacity_providers != [] && var.enable_spot ?  ["FARGATE_SPOT"] : ["FARGATE"]
 
@@ -29,12 +29,12 @@ resource "aws_ecs_cluster" "this" {
 resource "aws_ecs_task_definition" "this" {
   count = var.create_ecs ? 1 : 0
 
-  family = var.task_name
+  family = "${var.task_name}-${var.environment_name}"
   network_mode = var.network_mode
   requires_compatibilities = var.requires_compatibilities
 
-  task_role_arn = aws_iam_role.this.arn
-  execution_role_arn = aws_iam_role.this.arn
+  task_role_arn = var.create_iam_role ? aws_iam_role.this.arn : var.iam_role
+  execution_role_arn = var.create_iam_role ? aws_iam_role.this.arn : var.iam_role
 
   cpu = var.task_cpu
   memory = var.task_memory
@@ -81,15 +81,21 @@ EOF
 resource "aws_ecs_service" "this" {
   count = var.create_ecs ? 1 : 0
 
-  name            = var.task_name
+  name            = "${var.task_name}-${var.environment_name}"
   cluster         = aws_ecs_cluster.this[count.index].id
   task_definition = aws_ecs_task_definition.this[count.index].arn
   launch_type     = var.launch_type
 
-  desired_count = 1
+  desired_count = var.desired_count
 
-  deployment_maximum_percent         = 100
-  deployment_minimum_healthy_percent = 0
+  deployment_maximum_percent         = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
+
+  enable_ecs_managed_tags = var.enable_ecs_managed_tags
+  force_new_deployment = var.force_new_deployment
+
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  platform_version = var.platform_version
 
   network_configuration {
     subnets = var.subnets
@@ -99,7 +105,9 @@ resource "aws_ecs_service" "this" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.this[count.index].arn
-    container_name = var.task_name
-    container_port = 5000
+    container_name = "${var.task_name}-${var.environment_name}"
+    container_port = var.container_port
   }
+
+  tags = var.tags
 }

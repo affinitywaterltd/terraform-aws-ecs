@@ -1,6 +1,8 @@
 resource "aws_iam_role" "this" {
-  name = "ecs_task_role_${var.task_name}"
-  description = "IAM role applied to ECS Task - ${var.task_name}"
+  count = var.create_iam_role ? 1 : 0
+  
+  name = "ecs_task_role_${var.task_name}-${var.environment_name}"
+  description = "IAM role applied to ECS Task - ${var.task_name}-${var.environment_name}"
 
   assume_role_policy = <<EOF
 {
