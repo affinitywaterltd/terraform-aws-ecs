@@ -273,7 +273,7 @@ variable "startTimeout" {
 #####
 variable "ecs_services" {
   description = "The ECS service definition"
-  type        = map(string)
+  type        = any
   default     = {}
 }
 
