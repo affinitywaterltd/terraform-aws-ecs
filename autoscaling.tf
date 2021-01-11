@@ -1,16 +1,18 @@
 
 resource "aws_appautoscaling_target" "ecs_target" {
   count = var.enable_autoscaling ? length(var.task_names) : 0
+  
   max_capacity       = var.max_capacity
   min_capacity       = var.min_capacity
-  resource_id        = "service/${aws_ecs_cluster.this[0].name}/${aws_ecs_service.this[0].name}"
+  resource_id        = "service/${aws_ecs_cluster.this[0].name}/${aws_ecs_service.this[count.index].name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 }
 
 resource "aws_appautoscaling_policy" "ecs_policy_cpu" {
   count = var.enable_autoscaling && var.enable_autoscaling_cpu ? length(var.task_names) : 0
-  name               = "auto-scaling-tracking-${aws_ecs_service.this[0].name}-cpu"
+
+  name               = "auto-scaling-tracking-${aws_ecs_service.this[count.index].name}-cpu"
   policy_type        = "TargetTrackingScaling"
   resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
@@ -29,7 +31,8 @@ resource "aws_appautoscaling_policy" "ecs_policy_cpu" {
 
 resource "aws_appautoscaling_policy" "ecs_policy_memory" {
   count = var.enable_autoscaling && var.enable_autoscaling_memory ? length(var.task_names) : 0
-  name               = "ecs-auto-scaling-tracking-${aws_ecs_service.this[0].name}-memory"
+
+  name               = "ecs-auto-scaling-tracking-${aws_ecs_service.this[count.index].name}-memory"
   policy_type        = "TargetTrackingScaling"
   resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
