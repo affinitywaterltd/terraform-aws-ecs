@@ -49,18 +49,62 @@ resource "aws_appautoscaling_policy" "ecs_policy_memory" {
   }
 }
 
-resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled" {
-  #count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) > 0 ? length(var.autoscaling_scheduled_actions) : 0
-  count = 3
+resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_0" {
+  count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) == 1 ? length(var.task_names) : 0
 
-  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[*].name}"
-  resource_id        = aws_appautoscaling_target.ecs_target[*].resource_id
-  scalable_dimension = aws_appautoscaling_target.ecs_target[*].scalable_dimension
-  service_namespace  = aws_appautoscaling_target.ecs_target[*].service_namespace
-  schedule           = lookup(var.autoscaling_scheduled_actions[count.index],"schedule", null)
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
+  schedule           = lookup(var.autoscaling_scheduled_actions[0],"schedule", null)
 
   scalable_target_action   {
-    min_capacity  = lookup(var.autoscaling_scheduled_actions[count.index],"min_capacity", 0)
-    max_capacity  = lookup(var.autoscaling_scheduled_actions[count.index],"max_capacity", 0)
+    min_capacity  = lookup(var.autoscaling_scheduled_actions[0],"min_capacity", 0)
+    max_capacity  = lookup(var.autoscaling_scheduled_actions[0],"max_capacity", 0)
+  }
+}
+
+resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_1" {
+  count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) == 2 ? length(var.task_names) : 0
+
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
+  schedule           = lookup(var.autoscaling_scheduled_actions[1],"schedule", null)
+
+  scalable_target_action   {
+    min_capacity  = lookup(var.autoscaling_scheduled_actions[1],"min_capacity", 0)
+    max_capacity  = lookup(var.autoscaling_scheduled_actions[1],"max_capacity", 0)
+  }
+}
+
+resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_2" {
+  count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) == 3 ? length(var.task_names) : 0
+
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
+  schedule           = lookup(var.autoscaling_scheduled_actions[2],"schedule", null)
+
+  scalable_target_action   {
+    min_capacity  = lookup(var.autoscaling_scheduled_actions[2],"min_capacity", 0)
+    max_capacity  = lookup(var.autoscaling_scheduled_actions[2],"max_capacity", 0)
+  }
+}
+
+resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_4" {
+  count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) == 4 ? length(var.task_names) : 0
+
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
+  schedule           = lookup(var.autoscaling_scheduled_actions[3],"schedule", null)
+
+  scalable_target_action   {
+    min_capacity  = lookup(var.autoscaling_scheduled_actions[3],"min_capacity", 0)
+    max_capacity  = lookup(var.autoscaling_scheduled_actions[3],"max_capacity", 0)
   }
 }
