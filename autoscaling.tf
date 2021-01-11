@@ -50,8 +50,9 @@ resource "aws_appautoscaling_policy" "ecs_policy_memory" {
 }
 
 resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled" {
-  count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) > 0 ? length(var.autoscaling_scheduled_actions) : 0
-
+  #count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) > 0 ? length(var.autoscaling_scheduled_actions) : 0
+  count = 3
+  
   name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
   resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
