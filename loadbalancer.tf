@@ -10,6 +10,8 @@ resource "aws_lb_target_group" "this" {
   target_type = "ip"
   vpc_id   = data.aws_subnet.this.vpc_id
 
+  deregistration_delay = var.deregistration_delay
+  
   stickiness {
     type            = "lb_cookie"
     cookie_duration = 7200

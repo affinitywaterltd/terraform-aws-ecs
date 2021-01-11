@@ -360,3 +360,9 @@ variable "platform_version" {
   type        = string
   default     = "LATEST"
 }
+
+variable "deregistration_delay" {
+  description = "The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds."
+  type        = number
+  default     = 120
+}
