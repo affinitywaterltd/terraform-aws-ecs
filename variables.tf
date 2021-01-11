@@ -301,13 +301,13 @@ variable "desired_count" {
   default     = "0"
 }
 
-variable "max_capcity" {
+variable "max_capacity" {
   description = "The max number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy."
   type        = string
   default     = "0"
 }
 
-variable "min_capcity" {
+variable "min_capacity" {
   description = "The min number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy."
   type        = string
   default     = "0"
