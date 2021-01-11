@@ -271,6 +271,12 @@ variable "startTimeout" {
 #####
 ## ECS Service
 #####
+variable "ecs_services" {
+  description = "The ECS service definition"
+  type        = map(string)
+  default     = {}
+}
+
 variable "subnets" {
   description = "The subnets associated with the task or service"
   type        = list(string)
