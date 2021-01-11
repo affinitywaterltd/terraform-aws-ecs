@@ -14,7 +14,7 @@ output "ecs_cluster_name" {
 }
 
 
-output "lb_target_group_arn" {
+output "lb_target_group_arns" {
   description = "ARN of the LB Target Group"
-  value       = concat(aws_lb_target_group.this.*.arn, [""])[0]
+  value       = concat(aws_lb_target_group.this.*.arn, [""])
 }
