@@ -1,3 +1,4 @@
+/*
 resource "aws_appautoscaling_target" "ecs_target" {
   count = var.enable_autoscaling ? 1 : 0
   max_capacity       = 4
@@ -25,4 +26,4 @@ resource "aws_appautoscaling_policy" "ecs_policy" {
       scaling_adjustment          = -1
     }
   }
-}
+}*/
