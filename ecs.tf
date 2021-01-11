@@ -82,7 +82,7 @@ resource "aws_ecs_service" "this" {
   count = var.create_ecs ? length(var.task_names) : 0
 
   name            = "${var.task_names[count.index]}-${var.environment_name}"
-  cluster         = aws_ecs_cluster.this[count.index].id
+  cluster         = aws_ecs_cluster.this[0].id
   task_definition = aws_ecs_task_definition.this[count.index].arn
   launch_type     = var.launch_type
 
