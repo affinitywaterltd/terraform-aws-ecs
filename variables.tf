@@ -28,6 +28,42 @@ variable "enable_autoscaling" {
   default     = true
 }
 
+variable "enable_autoscaling_cpu" {
+  description = "Controls if an app autoscaling policy monitoring CPU is created"
+  type        = bool
+  default     = true
+}
+
+variable "enable_autoscaling_memory" {
+  description = "Controls if an app autoscaling policy monitoring memory is created"
+  type        = bool
+  default     = true
+}
+
+variable "autoscaling_target_value_memory" {
+  description = "Controls the target value for the memory autoscaling policy"
+  type        = number
+  default     = 70
+}
+
+variable "autoscaling_target_value_cpu" {
+  description = "Controls the target value for the cpu autoscaling policy"
+  type        = number
+  default     = 70
+}
+
+variable "scale_in_cooldown" {
+  description = "The amount of time, in seconds, after a scale in activity completes before another scale in activity can start"
+  type        = number
+  default     = 120
+}
+
+variable "scale_out_cooldown" {
+  description = "The amount of time, in seconds, after a scale out activity completes before another scale in activity can start"
+  type        = number
+  default     = 120
+}
+
 variable "create_lb_target_group" {
   description = "Controls if a Load Balancer Target Group is created"
   type        = bool
@@ -261,6 +297,18 @@ variable "launch_type" {
 
 variable "desired_count" {
   description = "The number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy."
+  type        = string
+  default     = "0"
+}
+
+variable "max_capcity" {
+  description = "The max number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy."
+  type        = string
+  default     = "0"
+}
+
+variable "min_capcity" {
+  description = "The min number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy."
   type        = string
   default     = "0"
 }
