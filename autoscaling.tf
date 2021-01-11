@@ -1,7 +1,7 @@
 
 resource "aws_appautoscaling_target" "ecs_target" {
   count = var.enable_autoscaling ? length(var.task_names) : 0
-  
+
   max_capacity       = var.max_capacity
   min_capacity       = var.min_capacity
   resource_id        = "service/${aws_ecs_cluster.this[0].name}/${aws_ecs_service.this[count.index].name}"
@@ -46,5 +46,20 @@ resource "aws_appautoscaling_policy" "ecs_policy_memory" {
     target_value = var.autoscaling_target_value_cpu
     scale_in_cooldown = var.scale_in_cooldown
     scale_out_cooldown = var.scale_out_cooldown
+  }
+}
+
+resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled" {
+  count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) > 0 ? length(var.autoscaling_scheduled_actions) : 0
+
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
+  schedule           = lookup(var.autoscaling_scheduled_actions[count.index],"schedule", null)
+
+  scalable_target_action   {
+    min_capacity  = lookup(var.autoscaling_scheduled_actions[count.index],"min_capacity", 0)
+    max_capacity  = lookup(var.autoscaling_scheduled_actions[count.index],"max_capacity", 0)
   }
 }

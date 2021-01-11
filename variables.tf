@@ -366,3 +366,16 @@ variable "deregistration_delay" {
   type        = number
   default     = 120
 }
+
+
+variable "autoscaling_scheduled_actions" {
+  description = "Custom scheduled scaling actions"
+  type        = any
+  default     = [
+    {
+      schedule = "cron(00 19 * * MON-FRI)"
+      min_capacity = 1
+      max_capacity = 2
+    }
+  ]
+}
