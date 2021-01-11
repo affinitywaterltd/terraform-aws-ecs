@@ -373,7 +373,7 @@ variable "autoscaling_scheduled_actions" {
   type        = any
   default     = [
     {
-      schedule = "cron(00 19 * * 1-5)"
+      schedule = "cron(00 19 * * 1-5 *)"
       min_capacity = 1
       max_capacity = 2
     }
