@@ -56,7 +56,7 @@ resource "aws_appautoscaling_policy" "ecs_policy_memory" {
 resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_0" {
   count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) >= 1 ? length(var.task_names) : 0
 
-  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}-0"
   resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
   service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
@@ -71,7 +71,7 @@ resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_0" {
 resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_1" {
   count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) >= 2 ? length(var.task_names) : 0
 
-  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}-1"
   resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
   service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
@@ -86,7 +86,7 @@ resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_1" {
 resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_2" {
   count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) >= 3 ? length(var.task_names) : 0
 
-  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}-2"
   resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
   service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
@@ -98,10 +98,10 @@ resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_2" {
   }
 }
 
-resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_4" {
+resource "aws_appautoscaling_scheduled_action" "ecs_policy_scheduled_3" {
   count = var.enable_autoscaling && length(var.autoscaling_scheduled_actions) >= 4 ? length(var.task_names) : 0
 
-  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}"
+  name               = "ecs-auto-scaling-scheduled-${aws_ecs_service.this[count.index].name}-3"
   resource_id        = aws_appautoscaling_target.ecs_target[count.index].resource_id
   scalable_dimension = aws_appautoscaling_target.ecs_target[count.index].scalable_dimension
   service_namespace  = aws_appautoscaling_target.ecs_target[count.index].service_namespace
