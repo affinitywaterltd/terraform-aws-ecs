@@ -27,9 +27,9 @@ resource "aws_ecs_cluster" "this" {
 
 
 resource "aws_ecs_task_definition" "this" {
-  count = var.create_ecs ? 1 : 0
+  count = var.create_ecs ? length(var.task_names) : 0
 
-  family = "${var.task_name}-${var.environment_name}"
+  family = "${var.task_names[count.index]}-${var.environment_name}"
   network_mode = var.network_mode
   requires_compatibilities = var.requires_compatibilities
 
@@ -61,14 +61,14 @@ resource "aws_ecs_task_definition" "this" {
     "volumesFrom": ${var.volumesFrom},
     "stopTimeout": ${var.stopTimeout},
     "startTimeout": ${var.startTimeout},
-    "name": "${var.task_name}-${var.environment_name}",
-    "image": "${var.image_name}",
+    "name": "${var.task_names[count.index]}-${var.environment_name}",
+    "image": "${var.image_names[count.index]}",
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
       "options": {
         "awslogs-region": "eu-west-1",
-        "awslogs-group": "/aws/ecs/tasks/${var.task_name}-${var.environment_name}",
-        "awslogs-stream-prefix": "${var.task_name}"
+        "awslogs-group": "/aws/ecs/tasks/${var.task_names[count.index]}-${var.environment_name}",
+        "awslogs-stream-prefix": "${var.task_names[count.index]}"
       }
     }
   }
@@ -79,12 +79,11 @@ EOF
 }
 
 resource "aws_ecs_service" "this" {
-  for_each = [var.ecs_services]
-  
-  #name            = "${var.task_name}-${var.environment_name}"
-  name = each.key
-  cluster         = aws_ecs_cluster.this[0].id
-  task_definition = aws_ecs_task_definition.this[0].arn
+  count = var.create_ecs ? length(var.task_names) : 0
+
+  name            = "${var.task_names[count.index]}-${var.environment_name}"
+  cluster         = aws_ecs_cluster.this[count.index].id
+  task_definition = aws_ecs_task_definition.this[count.index].arn
   launch_type     = var.launch_type
 
   desired_count = var.desired_count
@@ -105,8 +104,8 @@ resource "aws_ecs_service" "this" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.this[0].arn
-    container_name = "${var.task_name}-${var.environment_name}"
+    target_group_arn = aws_lb_target_group.this[count.index].arn
+    container_name = "${var.task_names[count.index]}-${var.environment_name}"
     container_port = var.container_port
   }
 

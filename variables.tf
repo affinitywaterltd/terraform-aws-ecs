@@ -116,10 +116,10 @@ variable "cloudwatch_retention_in_days" {
 #####
 ## ECS Task Definition
 #####
-variable "task_name" {
-  description = "Name to be used for the ECS Task Definition"
-  type        = string
-  default     = null
+variable "task_names" {
+  description = "Names to be used for the ECS Task Definition"
+  type        = list(string)
+  default     = []
 }
 
 variable "task_cpu" {
@@ -134,10 +134,10 @@ variable "task_memory" {
   default     = 512
 }
 
-variable "image_name" {
+variable "image_names" {
   description = "Name of the image to be used for the ECS Task Definition"
-  type        = string
-  default     = null
+  type        = list(string)
+  default     = []
 }
 
 variable "log_driver" {
@@ -271,12 +271,6 @@ variable "startTimeout" {
 #####
 ## ECS Service
 #####
-variable "ecs_services" {
-  description = "The ECS service definition"
-  type        = any
-  default     = {}
-}
-
 variable "subnets" {
   description = "The subnets associated with the task or service"
   type        = list(string)
