@@ -1,3 +1,9 @@
+variable "terraform_match_task_definition_service" {
+  description = "Custom scheduled scaling actions"
+  type        = bool
+  default     = false
+}
+
 variable "create_ecs" {
   description = "Controls if ECS should be created"
   type        = bool
@@ -371,10 +377,4 @@ variable "autoscaling_scheduled_actions" {
   description = "Custom scheduled scaling actions"
   type        = any
   default     = []
-}
-
-variable "match_terraform_task_definition" {
-  description = "Used to determine if Terraform ECS Service must match the Task defintion created via terrform (Set for false if using a pipeline deployment, and true to force a deployment )"
-  type        = bool
-  default     = false
 }

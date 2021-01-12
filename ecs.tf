@@ -24,8 +24,6 @@ resource "aws_ecs_cluster" "this" {
   tags = var.tags
 }
 
-
-
 resource "aws_ecs_task_definition" "this" {
   count = var.create_ecs ? length(var.task_names) : 0
 
@@ -78,8 +76,9 @@ EOF
   tags = var.tags
 }
 
+# ECS Service used if external service is updating task defintions and deployment to ECS services (such as CICD Pipelines)
 resource "aws_ecs_service" "this" {
-  count = var.create_ecs ? length(var.task_names) : 0
+  count = var.create_ecs && var.terraform_match_task_definition_service == false ? length(var.task_names) : 0
 
   name            = "${var.task_names[count.index]}-${var.environment_name}"
   cluster         = aws_ecs_cluster.this[0].id
@@ -112,6 +111,45 @@ resource "aws_ecs_service" "this" {
   tags = var.tags
 
   lifecycle {
-    ignore_changes = match_terraform_task_definition ? [desired_count] : [desired_count, task_definition]
+    ignore_changes = [desired_count, task_definition]
+  }
+}
+
+# ECS Service used if Terraform is the primary tool used to create and deploy new task defintiions (i.e not deployed via pipleines)
+resource "aws_ecs_service" "this_matched" {
+  count = var.create_ecs && var.terraform_match_task_definition_service ? length(var.task_names) : 0
+
+  name            = "${var.task_names[count.index]}-${var.environment_name}"
+  cluster         = aws_ecs_cluster.this[0].id
+  task_definition = aws_ecs_task_definition.this[count.index].arn
+  launch_type     = var.launch_type
+
+  desired_count = var.desired_count
+
+  deployment_maximum_percent         = var.deployment_maximum_percent
+  deployment_minimum_healthy_percent = var.deployment_minimum_healthy_percent
+
+  enable_ecs_managed_tags = var.enable_ecs_managed_tags
+  force_new_deployment = var.force_new_deployment
+
+  health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  platform_version = var.platform_version
+
+  network_configuration {
+    subnets = var.subnets
+    security_groups = var.security_groups
+    assign_public_ip = var.assign_public_ip
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.this[count.index].arn
+    container_name = "${var.task_names[count.index]}-${var.environment_name}"
+    container_port = var.container_port
+  }
+
+  tags = var.tags
+
+  lifecycle {
+    ignore_changes = [desired_count]
   }
 }
