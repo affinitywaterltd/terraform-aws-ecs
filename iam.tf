@@ -36,6 +36,6 @@ module "custom_iam_policy_attachments" {
 
   source = "./iam"
 
-  role         = aws_iam_role.this[count.index].name
+  iam_role         = aws_iam_role.this[count.index].name
   iam_policies = var.task_assigned_iam_policies[count.index]
 }
