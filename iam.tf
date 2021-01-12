@@ -32,7 +32,7 @@ resource "aws_iam_role_policy_attachment" "this" {
 }
 
 module "custom_iam_policy_attachments" {
-  count = var.create_iam_role ? length(var.task_names) : 0
+  count = var.create_iam_role && length(var.task_assigned_iam_policies) > 0 ? length(var.task_names) : 0
 
   source = "./iam"
 
