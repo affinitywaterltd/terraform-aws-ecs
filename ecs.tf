@@ -116,7 +116,7 @@ resource "aws_ecs_service" "this" {
 }
 
 # ECS Service used if Terraform is the primary tool used to create and deploy new task defintiions (i.e not deployed via pipleines)
-resource "aws_ecs_service" "this_matched" {
+resource "aws_ecs_service" "this_match" {
   count = var.create_ecs && var.terraform_match_task_definition_service ? length(var.task_names) : 0
 
   name            = "${var.task_names[count.index]}-${var.environment_name}"
