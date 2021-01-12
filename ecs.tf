@@ -112,6 +112,6 @@ resource "aws_ecs_service" "this" {
   tags = var.tags
 
   lifecycle {
-    ignore_changes = [desired_count, task_definition]
+    ignore_changes = match_terraform_task_definition ? [desired_count] : [desired_count, task_definition]
   }
 }
