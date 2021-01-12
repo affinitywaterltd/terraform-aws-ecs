@@ -30,3 +30,10 @@ resource "aws_iam_role_policy_attachment" "this" {
   role       = aws_iam_role.this[count.index].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
+
+module "custom_iam_policy_attachments" {
+  count = var.create_iam_role ? length(var.task_names) : 0
+
+  role         = aws_iam_role.this[count.index].name
+  iam_policies = var.task_assigned_iam_policies[count.index]
+}

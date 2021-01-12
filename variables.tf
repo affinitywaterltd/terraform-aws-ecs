@@ -378,3 +378,9 @@ variable "autoscaling_scheduled_actions" {
   type        = any
   default     = []
 }
+
+variable "task_assigned_iam_policies" {
+  description = "Attach IAM roles to each configured task definition"
+  type        = any
+  default     = []
+}
