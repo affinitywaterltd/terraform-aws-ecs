@@ -322,13 +322,13 @@ variable "min_capacity" {
 variable "deployment_maximum_percent" {
   description = "The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy."
   type        = string
-  default     = "100"
+  default     = "200"
 }
 
 variable "deployment_minimum_healthy_percent" {
   description = "The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment."
   type        = string
-  default     = "0"
+  default     = "100"
 }
 
 variable "enable_ecs_managed_tags" {
