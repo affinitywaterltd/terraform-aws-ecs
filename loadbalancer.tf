@@ -26,4 +26,6 @@ resource "aws_lb_target_group" "this" {
     unhealthy_threshold = 3
     interval            = 30
   }
+
+  tags = var.tags
 }

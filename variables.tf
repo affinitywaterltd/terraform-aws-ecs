@@ -10,6 +10,12 @@ variable "create_ecs" {
   default     = true
 }
 
+variable "create_ecr" {
+  description = "Controls if ECR should be created"
+  type        = bool
+  default     = true
+}
+
 variable "name" {
   description = "Name to be used on all the resources as identifier, also the name of the ECS cluster"
   type        = string
@@ -383,4 +389,17 @@ variable "task_assigned_iam_policies" {
   description = "Attach IAM roles to each configured task definition"
   type        = any
   default     = []
+}
+
+variable "image_tag_mutability"{
+  description = "The tag mutability setting for the repository. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE"
+  type        = string
+  default     = "MUTABLE"
+}
+
+
+variable "scan_on_push"{
+  description = "(Required) Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false)."
+  type        = bool
+  default     = true
 }
