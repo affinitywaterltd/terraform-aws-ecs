@@ -8,5 +8,10 @@ resource "aws_ecr_repository" "this" {
     scan_on_push = var.scan_on_push
   }
 
+  encryption_configuration {
+    encryption_type = var.ecr_encryption_type
+    kms_key - var.ecr_kms_key
+  }
+
   tags = var.tags
 }
