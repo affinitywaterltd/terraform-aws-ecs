@@ -146,10 +146,23 @@ variable "task_memory" {
   default     = 512
 }
 
-variable "image_names" {
+variable "custom_image_names" {
   description = "Name of the image to be used for the ECS Task Definition"
   type        = list(string)
   default     = []
+}
+
+variable "custom_image_tags" {
+  description = "Name of the image tag to be used for the ECS Task Definition"
+  type        = list(string)
+  default     = []
+}
+
+
+variable "default_image_tags" {
+  description = "Name of the default image tag to be used for the ECS Task Definition"
+  type        = string
+  default     = "latest"
 }
 
 variable "log_driver" {

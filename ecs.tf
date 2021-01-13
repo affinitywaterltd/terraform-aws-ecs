@@ -60,7 +60,7 @@ resource "aws_ecs_task_definition" "this" {
     "stopTimeout": ${var.stopTimeout},
     "startTimeout": ${var.startTimeout},
     "name": "${var.task_names[count.index]}-${var.environment_name}",
-    "image": "${var.image_names[count.index]}",
+    "image": "${length(var.custom_image_names) > 0 ? var.custom_image_names[count.index] : aws_ecr_repository.this[count.index].repository_url}",
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
       "options": {
