@@ -10,7 +10,7 @@ resource "aws_ecr_repository" "this" {
 
   encryption_configuration {
     encryption_type = var.ecr_encryption_type
-    kms_key - var.ecr_kms_key
+    kms_key = var.ecr_kms_key
   }
 
   tags = var.tags
