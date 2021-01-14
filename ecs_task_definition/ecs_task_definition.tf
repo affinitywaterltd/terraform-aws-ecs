@@ -49,8 +49,8 @@ resource "aws_ecs_task_definition" "this" {
     "volumesFrom": ${var.volumesFrom},
     "stopTimeout": ${var.stopTimeout}, 
     "startTimeout": ${var.startTimeout},
-    "name": ${var.task_name},
-    "image": ${var.image_name}
+    "name": "${var.task_name}",
+    "image": "${var.image_name}"
   }
 ]
 EOF
