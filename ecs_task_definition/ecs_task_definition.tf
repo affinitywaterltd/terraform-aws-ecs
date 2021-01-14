@@ -1,8 +1,14 @@
 /*
     
-    "name": ${var.task_name},
-    "image": ${var.image_name},
-    ,
+    
+    "logConfiguration": {
+      "logDriver": ${var.log_driver},
+      "options": {
+        "awslogs-region": ${var.awslogs-region},
+        "awslogs-group": ${var.awslogs-group},
+        "awslogs-stream-prefix": ${var.awslogs-stream-prefix}
+      }
+    }
     
     
     */
@@ -43,14 +49,8 @@ resource "aws_ecs_task_definition" "this" {
     "volumesFrom": ${var.volumesFrom},
     "stopTimeout": ${var.stopTimeout}, 
     "startTimeout": ${var.startTimeout},
-    "logConfiguration": {
-      "logDriver": ${var.log_driver},
-      "options": {
-        "awslogs-region": ${var.awslogs-region},
-        "awslogs-group": ${var.awslogs-group},
-        "awslogs-stream-prefix": ${var.awslogs-stream-prefix}
-      }
-    }
+    "name": ${var.task_name},
+    "image": ${var.image_name}
   }
 ]
 EOF

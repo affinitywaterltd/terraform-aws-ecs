@@ -40,20 +40,20 @@ variable "logDriver" {
 variable "awslogs-group" {
   description = "Log Group name used for awslogs deamon"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "awslogs-stream-prefix" {
   description = "Prefix used for log streams"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 
 variable "task_name" {
   description = "Names to be used for the ECS Task Definition"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "cpu" {
@@ -83,7 +83,7 @@ variable "task_memory" {
 variable "image_name" {
   description = "Name of the image to be used for the ECS Task Definition"
   type        = string
-  default     = null
+  default     = "null"
 }
 
 variable "image_tag" {
