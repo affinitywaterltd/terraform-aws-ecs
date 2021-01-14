@@ -1,3 +1,5 @@
+data "aws_region" "current" {}
+
 variable "terraform_match_task_definition_service" {
   description = "Custom scheduled scaling actions"
   type        = bool

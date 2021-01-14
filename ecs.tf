@@ -24,8 +24,10 @@ resource "aws_ecs_cluster" "this" {
   tags = var.tags
 }
 
-resource "aws_ecs_task_definition" "this" {
+module "aws_ecs_task_definition" "this" {
   count = var.create_ecs ? length(var.task_names) : 0
+
+  source = "./ecs_task_definition"
 
   family = "${var.task_names[count.index]}-${var.environment_name}"
   network_mode = var.network_mode
@@ -36,40 +38,34 @@ resource "aws_ecs_task_definition" "this" {
 
   cpu = var.task_cpu
   memory = var.task_memory
-  container_definitions = <<EOF
-[
-  {
-    "cpu": ${var.task_cpu},
-    "memory": ${var.task_memory},
-    "dnsSearchDomains": ${var.dnsSearchDomains},
-    "environmentFiles": ${var.environmentFiles},
-    "secretOptions": ${var.secretOptions},
-    "entryPoint": ${var.entryPoint},
-    "portMappings": ${var.portMappings},
-    "command": ${var.command},
-    "linuxParameters": ${var.linuxParameters},
-    "environment": ${var.environment},
-    "resourceRequirements": ${var.resourceRequirements},
-    "ulimits": ${var.ulimits},
-    "dnsServers": ${var.dnsServers},
-    "mountPoints": ${var.mountPoints},
-    "workingDirectory": ${var.workingDirectory},
-    "secrets": ${var.secrets},
-    "dockerSecurityOptions": ${var.dockerSecurityOptions},
-    "volumesFrom": ${var.volumesFrom},
-    "stopTimeout": ${var.stopTimeout},
-    "startTimeout": ${var.startTimeout},
-    "name": "${var.task_names[count.index]}-${var.environment_name}",
-    "image": "${length(var.custom_image_names) > 0 ? var.custom_image_names[count.index] : aws_ecr_repository.this[count.index].repository_url}",
-    "logConfiguration": {
-      "logDriver": "${var.log_driver}",
-      "options": {
-        "awslogs-region": "eu-west-1",
-        "awslogs-group": "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}",
-        "awslogs-stream-prefix": "${var.task_names[count.index]}/${var.environment_name}}/"
-      }
-    }
-  }
+
+  task_cpu = var.task_cpu
+  memory = var.task_memory
+  dnsSearchDomains = var.dnsSearchDomains
+  environmentFiles = var.environmentFiles
+  secretOptions = var.secretOptions
+  entryPoint = var.entryPoint
+  portMappings = var.portMappings
+  command = var.command
+  linuxParameters = var.linuxParameters
+  environment = var.environment
+  resourceRequirements = var.resourceRequirements
+  ulimits = var.ulimits
+  dnsServers = var.dnsServers
+  mountPoints = var.mountPoints
+  workingDirectory = var.workingDirectory
+  secrets = var.secrets
+  dockerSecurityOptions = var.dockerSecurityOptions
+  volumesFrom = var.volumesFrom
+  stopTimeout = var.stopTimeout
+  startTimeout = var.startTimeout
+  name = "${var.task_names[count.index]}-${var.environment_name}"
+  image = "${length(var.custom_image_names) > 0 ? var.custom_image_names[count.index] : aws_ecr_repository.this[count.index].repository_url}"
+  logDriver = var.log_driver
+  awslogs-region = data.aws_region.current.name
+  awslogs-group = "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}"
+  awslogs-stream-prefix = "${var.task_names[count.index]}/${var.environment_name}}/"
+
 ]
 EOF
 
