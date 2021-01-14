@@ -24,7 +24,7 @@ resource "aws_ecs_cluster" "this" {
   tags = var.tags
 }
 
-module "aws_ecs_task_definition" "this" {
+module "aws_ecs_task_definition" {
   count = var.create_ecs ? length(var.task_names) : 0
 
   source = "./ecs_task_definition"
@@ -40,7 +40,7 @@ module "aws_ecs_task_definition" "this" {
   memory = var.task_memory
 
   task_cpu = var.task_cpu
-  memory = var.task_memory
+  task_memory = var.task_memory
   dnsSearchDomains = var.dnsSearchDomains
   environmentFiles = var.environmentFiles
   secretOptions = var.secretOptions
@@ -65,9 +65,6 @@ module "aws_ecs_task_definition" "this" {
   awslogs-region = data.aws_region.current.name
   awslogs-group = "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}"
   awslogs-stream-prefix = "${var.task_names[count.index]}/${var.environment_name}}/"
-
-]
-EOF
 
   tags = var.tags
 }
