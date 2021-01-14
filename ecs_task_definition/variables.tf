@@ -1,4 +1,4 @@
-variable "aws_region" {
+variable "awslogs-region" {
   description = "Region resources are deployed in"
   type        = string
   default     = "eu-west-1"
@@ -11,6 +11,12 @@ variable "family" {
   description = "(Required) A unique name for your task definition."
   type        = string
   default     = null
+}
+
+variable "requires_compatibilities" {
+  description = "(Optional) A set of launch types required by the task. The valid values are EC2 and FARGATE."
+  type        = string
+  default     = "FARGATE"
 }
 
 variable "task_role_arn" {
@@ -217,4 +223,10 @@ variable "startTimeout" {
   description = "Set value within containerDefinitions"
   type        = string
   default     = "null"
+}
+
+variable "tags" {
+  description = "A map of tags to add to ECS Task Definition"
+  type        = map(string)
+  default     = {}
 }

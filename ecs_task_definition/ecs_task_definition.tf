@@ -37,7 +37,7 @@ resource "aws_ecs_task_definition" "this" {
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
       "options": {
-        "awslogs-region": "${var.aws_region},
+        "awslogs-region": "${var.awslogs-region},
         "awslogs-group": "${var.awslogs-group}",
         "awslogs-stream-prefix": "${var.awslogs-stream-prefix}"
       }
