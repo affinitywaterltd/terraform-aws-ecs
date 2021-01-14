@@ -38,7 +38,7 @@ resource "aws_ecs_task_definition" "this" {
       "options": {
         "awslogs-region": ${var.awslogs-region},
         "awslogs-group": ${var.awslogs-group},
-        "awslogs-stream-prefix": ${var.awslogs-stream-prefix}
+        "awslogs-stream-prefix": ${var.awslogs-stream-prefix}"
       }
     }
   }
