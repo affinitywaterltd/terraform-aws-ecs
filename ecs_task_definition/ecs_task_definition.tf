@@ -1,7 +1,6 @@
 /*
     
     ,
-    "name": ${var.task_name},
     "image": ${var.image_name}
     "logConfiguration": {
       "logDriver": ${var.log_driver},
@@ -48,7 +47,8 @@ resource "aws_ecs_task_definition" "this" {
     "dockerSecurityOptions": ${var.dockerSecurityOptions},
     "volumesFrom": ${var.volumesFrom},
     "stopTimeout": ${var.stopTimeout}, 
-    "startTimeout": ${var.startTimeout}
+    "startTimeout": ${var.startTimeout},
+    "name": ${var.task_name}
   }
 ]
 EOF
