@@ -37,12 +37,6 @@ variable "execution_role_arn" {
   default     = null
 }
 
-variable "execution_role_arn" {
-  description = "(Optional) The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume"
-  type        = string
-  default     = null
-}
-
 variable "task_names" {
   description = "Names to be used for the ECS Task Definition"
   type        = list(string)
