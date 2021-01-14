@@ -126,7 +126,7 @@ variable "dnsSearchDomains" {
 variable "environmentFiles" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = "null"
+  default     = "[]"
 }
 
 variable "secretOptions" {
@@ -198,7 +198,7 @@ variable "workingDirectory" {
 variable "secrets" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = "null"
+  default     = "[]"
 }
 
 variable "dockerSecurityOptions" {
