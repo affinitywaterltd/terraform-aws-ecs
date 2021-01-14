@@ -1,4 +1,3 @@
-
 resource "aws_ecs_task_definition" "this" {
   family = var.family
   network_mode = var.network_mode
