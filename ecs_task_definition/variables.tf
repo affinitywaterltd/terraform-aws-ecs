@@ -44,10 +44,22 @@ variable "awslogs-stream-prefix" {
 }
 
 
-variable "task_names" {
+variable "task_name" {
   description = "Names to be used for the ECS Task Definition"
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = null
+}
+
+variable "cpu" {
+  description = "The vCPU specification for the ECS Task Definition"
+  type        = string
+  default     = 256
+}
+
+variable "memory" {
+  description = "The memory specification for the ECS Task Definition"
+  type        = string
+  default     = 512
 }
 
 variable "task_cpu" {
@@ -64,14 +76,14 @@ variable "task_memory" {
 
 variable "image_name" {
   description = "Name of the image to be used for the ECS Task Definition"
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = null
 }
 
 variable "image_tag" {
   description = "Name of the image tag to be used for the ECS Task Definition"
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = "latest"
 }
 
 

@@ -32,8 +32,8 @@ resource "aws_ecs_task_definition" "this" {
     "volumesFrom": ${var.volumesFrom},
     "stopTimeout": ${var.stopTimeout},
     "startTimeout": ${var.startTimeout},
-    "name": "${var.task_names[count.index]}-${var.environment_name}",
-    "image": "${length(var.custom_image_names) > 0 ? var.custom_image_names[count.index] : aws_ecr_repository.this[count.index].repository_url}",
+    "name": "${var.task_name}",
+    "image": "${var.image_name}:${var.image_tag}",
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
       "options": {
