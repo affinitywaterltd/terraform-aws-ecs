@@ -46,7 +46,7 @@ resource "aws_ecs_task_definition" "this" {
 [
   {
     "cpu": ${var.task_cpu},
-    "memory": ${var.task_memory},
+    "memory": ${var.task_memory}
 
   }
 ]
