@@ -29,16 +29,16 @@ resource "aws_ecs_task_definition" "this" {
     "secrets": ${var.secrets},
     "dockerSecurityOptions": ${var.dockerSecurityOptions},
     "volumesFrom": ${var.volumesFrom},
-    "stopTimeout": ${var.stopTimeout},
+    "stopTimeout": ${var.stopTimeout}, 
     "startTimeout": ${var.startTimeout},
-    "name": "${var.task_name}",
+    "name": ${var.task_name},
     "image": "${var.image_name}:${var.image_tag}",
     "logConfiguration": {
-      "logDriver": "${var.log_driver}",
+      "logDriver": ${var.log_driver},
       "options": {
-        "awslogs-region": "${var.awslogs-region},
-        "awslogs-group": "${var.awslogs-group}",
-        "awslogs-stream-prefix": "${var.awslogs-stream-prefix}"
+        "awslogs-region": ${var.awslogs-region},
+        "awslogs-group": ${var.awslogs-group},
+        "awslogs-stream-prefix": ${var.awslogs-stream-prefix}
       }
     }
   }
