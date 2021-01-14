@@ -38,8 +38,8 @@ resource "aws_ecs_task_definition" "this" {
       "logDriver": "${var.log_driver}",
       "options": {
         "awslogs-region": "${var.aws_region},
-        "awslogs-group": "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}",
-        "awslogs-stream-prefix": "${var.task_names[count.index]}/${var.environment_name}}/"
+        "awslogs-group": "${var.awslogs-group}",
+        "awslogs-stream-prefix": "${var.awslogs-stream-prefix}"
       }
     }
   }
