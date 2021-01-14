@@ -1,14 +1,6 @@
 /*
     
-    "mountPoints": ${var.mountPoints},
-    "workingDirectory": ${var.workingDirectory},
-    "secrets": ${var.secrets},
-    "dockerSecurityOptions": ${var.dockerSecurityOptions},
-    "volumesFrom": ${var.volumesFrom},
-    "stopTimeout": ${var.stopTimeout}, 
-    "startTimeout": ${var.startTimeout},
-    "name": ${var.task_name},
-    "image": ${var.image_name},
+    
     "logConfiguration": {
       "logDriver": ${var.log_driver},
       "options": {
@@ -47,7 +39,16 @@ resource "aws_ecs_task_definition" "this" {
     "environment": ${var.environment},
     "resourceRequirements": ${var.resourceRequirements},
     "ulimits": ${var.ulimits},
-    "dnsServers": ${var.dnsServers}
+    "dnsServers": ${var.dnsServers},
+    "mountPoints": ${var.mountPoints},
+    "workingDirectory": ${var.workingDirectory},
+    "secrets": ${var.secrets},
+    "dockerSecurityOptions": ${var.dockerSecurityOptions},
+    "volumesFrom": ${var.volumesFrom},
+    "stopTimeout": ${var.stopTimeout}, 
+    "startTimeout": ${var.startTimeout},
+    "name": ${var.task_name},
+    "image": ${var.image_name}
   }
 ]
 EOF
