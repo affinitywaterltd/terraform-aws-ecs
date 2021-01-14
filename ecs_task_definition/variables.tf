@@ -15,8 +15,8 @@ variable "family" {
 
 variable "requires_compatibilities" {
   description = "(Optional) A set of launch types required by the task. The valid values are EC2 and FARGATE."
-  type        = string
-  default     = "FARGATE"
+  type        = list(string)
+  default     = ["FARGATE"]
 }
 
 variable "task_role_arn" {
