@@ -120,7 +120,7 @@ variable "network_mode" {
 variable "dnsSearchDomains" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = "null"
+  default     = "[]"
 }
 
 variable "environmentFiles" {

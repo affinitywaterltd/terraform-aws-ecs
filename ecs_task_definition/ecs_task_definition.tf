@@ -31,7 +31,7 @@ resource "aws_ecs_task_definition" "this" {
   {
     "cpu": ${var.task_cpu},
     "memory": ${var.task_memory},
-    "dnsSearchDomains": "${var.dnsSearchDomains}",
+    "dnsSearchDomains": ${var.dnsSearchDomains},
     "environmentFiles": "${var.environmentFiles}",
     "secretOptions": "${var.secretOptions}",
     "entryPoint": "${var.entryPoint}",
