@@ -260,7 +260,7 @@ variable "mountPoints" {
 variable "workingDirectory" {
   description = "Set value within containerDefinitions"
   type        = string
-  default     = "null"
+  default     = "/build"
 }
 
 variable "secrets" {
