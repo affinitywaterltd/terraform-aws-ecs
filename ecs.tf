@@ -1,3 +1,7 @@
+locals {
+  image_tags = length(var.custom_image_tags) > 0 ? var.custom_image_tags : var.default_image_tags
+}
+
 resource "aws_ecs_cluster" "this" {
   count = var.create_ecs ? 1 : 0
 
@@ -60,7 +64,7 @@ module "aws_ecs_task_definition" {
   stopTimeout = var.stopTimeout
   startTimeout = var.startTimeout
   task_name = "${var.task_names[count.index]}-${var.environment_name}"
-  image_name = length(var.custom_image_names) > 0 ? var.custom_image_names[count.index] : aws_ecr_repository.this[count.index].repository_url
+  image_name = length(var.custom_image_names) > 0 ? "${var.custom_image_names[count.index]}:${var.image_tag[count.index]}" : "${aws_ecr_repository.this[count.index].repository_url}:${var.image_tag[count.index]}"
   logDriver = var.log_driver
   awslogs-region = data.aws_region.current.name
   awslogs-group = "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}"
