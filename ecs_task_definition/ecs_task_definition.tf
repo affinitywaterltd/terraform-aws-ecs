@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "this" {
     "stopTimeout": ${var.stopTimeout}, 
     "startTimeout": ${var.startTimeout},
     "name": "${var.task_name}",
-    "image": "${var.image_name}"
+    "image": "${var.image_name}",
     "logConfiguration": {
       "logDriver": "awslogs",
 
