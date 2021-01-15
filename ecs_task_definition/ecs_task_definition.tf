@@ -53,11 +53,7 @@ resource "aws_ecs_task_definition" "this" {
     "image": "${var.image_name}"
     "logConfiguration": {
       "logDriver": "${var.log_driver}",
-      "options": {
-        "awslogs-region": "${var.awslogs-region}",
-        "awslogs-group": "${var.awslogs-group}",
-        "awslogs-stream-prefix": "${var.awslogs-stream-prefix}"
-      }
+
     }
   }
 ]
