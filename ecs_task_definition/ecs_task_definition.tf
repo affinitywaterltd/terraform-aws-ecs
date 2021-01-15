@@ -52,7 +52,8 @@ resource "aws_ecs_task_definition" "this" {
     "name": "${var.task_name}",
     "image": "${var.image_name}",
     "logConfiguration": {
-      "logDriver": "${var.log_driver}"
+      "logDriver": "${var.log_driver}",
+      "awslogs-group": "${var.awslogs-group}"
 
     }
   }
