@@ -64,7 +64,7 @@ module "aws_ecs_task_definition" {
   logDriver = var.log_driver
   awslogs-region = data.aws_region.current.name
   awslogs-group = "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}"
-  awslogs-stream-prefix = "${var.task_names[count.index]}/${var.environment_name}}/"
+  awslogs-stream-prefix = "task/${var.task_names[count.index]}/${var.environment_name}/"
 
   tags = var.tags
 }
