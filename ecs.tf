@@ -63,8 +63,8 @@ module "aws_ecs_task_definition" {
   image_name = length(var.custom_image_names) > 0 ? var.custom_image_names[count.index] : aws_ecr_repository.this[count.index].repository_url
   #logDriver = var.log_driver
   #awslogs-region = data.aws_region.current.name
-  awslogs-group = "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}"
-  awslogs-stream-prefix = "${var.task_names[count.index]}/${var.environment_name}}/"
+  #awslogs-group = "/aws/ecs/cluster/${aws_ecs_cluster.this[0].name}"
+  #awslogs-stream-prefix = "${var.task_names[count.index]}/${var.environment_name}}/"
 
   tags = var.tags
 }
