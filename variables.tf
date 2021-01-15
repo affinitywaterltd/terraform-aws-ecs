@@ -163,7 +163,7 @@ variable "custom_image_tags" {
 
 variable "default_image_tags" {
   description = "Name of the default image tag to be used for the ECS Task Definition"
-  type        = string
+  type        = list(string)
   default     = ["latest", "latest", "latest", "latest", "latest", "latest", "latest", "latest", "latest", "latest"]
 }
 
