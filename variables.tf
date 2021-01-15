@@ -154,7 +154,7 @@ variable "custom_image_names" {
   default     = []
 }
 
-variable "custom_image_tags" {
+variable "custom_tag_names" {
   description = "Name of the image tag to be used for the ECS Task Definition"
   type        = list(string)
   default     = []

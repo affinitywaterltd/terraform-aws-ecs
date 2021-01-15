@@ -1,5 +1,5 @@
 locals {
-  image_tags = length(var.custom_image_tags) > 0 ? var.custom_image_tags : var.default_image_tags
+  image_tags = length(var.custom_tag_names) > 0 ? var.custom_tag_names : var.default_image_tags
 }
 
 resource "aws_ecs_cluster" "this" {
