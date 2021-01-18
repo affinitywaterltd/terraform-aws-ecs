@@ -18,6 +18,12 @@ variable "create_ecr" {
   default     = true
 }
 
+variable "ecr_cross_account_princpals" {
+  description = "Used to define the ECR Permissions Policy - Controls which other accounts might be given access to the ECR repo"
+  type        = list(string)
+  default     = []
+}
+
 variable "name" {
   description = "Name to be used on all the resources as identifier, also the name of the ECS cluster"
   type        = string

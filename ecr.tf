@@ -15,3 +15,33 @@ resource "aws_ecr_repository" "this" {
 
   tags = var.tags
 }
+
+resource "aws_ecr_repository_policy" "allow_all" {
+  count = var.create_ecs ? length(var.task_names) : 0
+
+  repository = aws_ecr_repository.this[count.index].name
+
+  policy = <<EOF
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPushPull",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": ${var.ecr_cross_account_princpals}"arn:aws:iam::633033879498:root"
+            },
+            "Action": [
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload"
+            ]
+        }
+    ]
+}
+EOF
+}
