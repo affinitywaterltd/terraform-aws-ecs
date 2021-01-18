@@ -20,8 +20,8 @@ variable "create_ecr" {
 
 variable "ecr_cross_account_princpals" {
   description = "Used to define the ECR Permissions Policy - Controls which other accounts might be given access to the ECR repo"
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = "[]"
 }
 
 variable "name" {
