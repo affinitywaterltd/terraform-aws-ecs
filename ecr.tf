@@ -29,7 +29,7 @@ resource "aws_ecr_repository_policy" "allow_all" {
             "Sid": "AllowPushPull",
             "Effect": "Allow",
             "Principal": {
-                "AWS": ["${join("\",\"", var.ecr_cross_account_princpals}"]
+                "AWS": [${join("\",\"", var.ecr_cross_account_princpals}]
             },
             "Action": [
                 "ecr:GetDownloadUrlForLayer",
