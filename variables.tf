@@ -435,3 +435,63 @@ variable "ecr_kms_key"{
   type        = string
   default     = null
 }
+
+variable "healthcheck_path" {
+  description = "The URL path used to conduct the load balancer healtcheck"
+  type        = string
+  default     = "/"
+}
+
+variable "healthcheck_protocol" {
+  description = "The protocol used to conduct the load balancer healtcheck"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "healthcheck_healthy_threshold" {
+  description = "The number of checks to pass before deeming resource as healthy"
+  type        = number
+  default     = 3
+}
+
+variable "healthcheck_unhealthy_threshold" {
+  description = "The number of checks to fail before deeming resource as unhealthy"
+  type        = number
+  default     = 3
+}
+
+variable "healthcheck_interval" {
+  description = "The time between each loadbalancer healthcheck"
+  type        = number
+  default     = 30
+}
+
+variable "protocol" {
+  description = "The protocol used to pass traffic to the resource"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "target_type" {
+  description = "The connection method to the resource (e.g. instance or ip)"
+  type        = string
+  default     = "ip"
+}
+
+variable "stickiness_type" {
+  description = "The type of session stickiness used"
+  type        = string
+  default     = "lb_cookie"
+}
+
+variable "stickiness_cookie_duration" {
+  description = "The session stickiness duration"
+  type        = number
+  default     = 1800
+}
+
+variable "stickiness_enabled" {
+  description = "The enabled status of session stickiness"
+  type        = bool
+  default     = true
+}
