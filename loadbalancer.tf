@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "this" {
     port                = var.container_port
     healthy_threshold   = var.healtcheck_healthy_threshold
     unhealthy_threshold = var.healtcheck_unhealthy_threshold
-    interval            = vat.healtcheck_interval
+    interval            = var.healtcheck_interval
   }
 
   tags = var.tags
