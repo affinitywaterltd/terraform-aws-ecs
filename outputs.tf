@@ -8,9 +8,9 @@ output "ecs_cluster_arn" {
   value       = concat(aws_ecs_cluster.this.*.arn, [""])[0]
 }
 
-output "ecs_service_arns" {
-  description = "ARNs of the ECS Services"
-  value       = concat(aws_ecs_service.this.*.arn, [""])
+output "ecs_service_ids" {
+  description = "IDs of the ECS Services"
+  value       = concat(aws_ecs_service.this.*.id, [""])
 }
 
 output "ecs_task_definition_families" {
@@ -22,7 +22,6 @@ output "ecs_cluster_name" {
   description = "The name of the ECS cluster"
   value       = var.name
 }
-
 
 output "lb_target_group_arns" {
   description = "ARN of the LB Target Group"
