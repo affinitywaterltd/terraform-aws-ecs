@@ -8,6 +8,16 @@ output "ecs_cluster_arn" {
   value       = concat(aws_ecs_cluster.this.*.arn, [""])[0]
 }
 
+output "ecs_service_arns" {
+  description = "ARNs of the ECS Services"
+  value       = concat(aws_ecs_service.this.*.arn, [""])
+}
+
+output "ecs_task_definition_families" {
+  description = "Familites of the ECS Task Definitiopns"
+  value       = concat(module.aws_ecs_task_definition.this.*.arn, [""])
+}
+
 output "ecs_cluster_name" {
   description = "The name of the ECS cluster"
   value       = var.name
