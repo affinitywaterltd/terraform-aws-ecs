@@ -15,7 +15,7 @@ output "ecs_service_arns" {
 
 output "ecs_task_definition_families" {
   description = "Familites of the ECS Task Definitiopns"
-  value       = concat(module.aws_ecs_task_definition.this.*.arn, [""])
+  value       = concat(module.aws_ecs_task_definition.*.ecs_task_definition_family, [""])
 }
 
 output "ecs_cluster_name" {
