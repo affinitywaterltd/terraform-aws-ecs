@@ -12,7 +12,7 @@ resource "aws_iam_role" "this" {
 
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": ["ecs-tasks.amazonaws.com", "arn:arw:iam::${data.aws_caller_identity.current.account_id}:*${var.task_names[count.index]}-${var.environment_name}*]
+        "Service": ["ecs-tasks.amazonaws.com", "arn:arw:iam::${data.aws_caller_identity.current.account_id}:*${var.task_names[count.index]}-${var.environment_name}*"]
       },
       "Effect": "Allow",
       "Sid": ""
