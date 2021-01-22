@@ -27,3 +27,8 @@ output "lb_target_group_arns" {
   description = "ARN of the LB Target Group"
   value       = concat(aws_lb_target_group.this.*.arn, [""])
 }
+
+output "iam_ecs_task_roles" {
+  description = "ARN of the IAM Roles used by ECS"
+  value       = concat(aws_iam_role.this.*.arn, [""])
+}
