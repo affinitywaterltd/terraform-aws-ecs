@@ -440,8 +440,8 @@ variable "ecr_kms_key"{
 
 variable "healthcheck_path" {
   description = "The URL path used to conduct the load balancer healtcheck"
-  type        = string
-  default     = "/"
+  type        = list
+  default     = []
 }
 
 variable "healthcheck_protocol" {

@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "this" {
   }
 
   health_check {
-    path                = var.healthcheck_path
+    path                = var.healthcheck_path[count.index]
     protocol            = var.healthcheck_protocol
     port                = var.container_port
     healthy_threshold   = var.healthcheck_healthy_threshold
