@@ -7,7 +7,7 @@ resource "aws_ecs_cluster" "this" {
 
   name = "${var.name}-${var.environment_name}"
 
-  capacity_providers = var.capacity_providers != [] && var.enable_spot ?  ["FARGATE_SPOT"] : ["FARGATE"]
+  capacity_providers = var.enable_spot ?  ["FARGATE_SPOT"] : ["FARGATE"]
 
   dynamic "default_capacity_provider_strategy" {
     for_each = length(keys(var.default_capacity_provider_strategy)) == 0 ? [] : [var.default_capacity_provider_strategy]
