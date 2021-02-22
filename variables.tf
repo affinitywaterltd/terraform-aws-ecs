@@ -20,6 +20,12 @@ variable "create_ecr" {
   default     = true
 }
 
+variable "enable_loadbalancer" {
+  description = "Controls if load balancer is used by the service"
+  type        = bool
+  default     = true
+}
+
 variable "ecr_cross_account_princpals" {
   description = "Used to define the ECR Permissions Policy - Controls which other accounts might be given access to the ECR repo"
   type        = string

@@ -55,10 +55,14 @@ resource "aws_ecs_service" "this" {
     assign_public_ip = var.assign_public_ip
   }
 
-  load_balancer {
-    target_group_arn = aws_lb_target_group.this[count.index].arn
-    container_name = "${var.task_names[count.index]}-${var.environment_name}"
-    container_port = var.container_port
+  dynamic "load_balancer"{
+    for_each = var.enable_loadbalancer == true ? [1] : []
+
+    content {
+      target_group_arn = aws_lb_target_group.this[count.index].arn
+      container_name = "${var.task_names[count.index]}-${var.environment_name}"
+      container_port = var.container_port
+    }
   }
 
   tags = var.tags
