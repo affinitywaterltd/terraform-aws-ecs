@@ -32,3 +32,7 @@ output "iam_ecs_task_roles" {
   description = "ARN of the IAM Roles used by ECS"
   value       = concat(aws_iam_role.this.*.arn, [""])
 }
+output "ecr_arn" {
+  description = "ARN of the ECR Repo used by ECS"
+  value       = concat(aws_ecr_repository.this.*.arn, [""])
+}
