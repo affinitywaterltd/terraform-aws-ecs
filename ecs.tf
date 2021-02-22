@@ -46,7 +46,7 @@ resource "aws_ecs_service" "this" {
   enable_ecs_managed_tags = var.enable_ecs_managed_tags
   force_new_deployment = var.force_new_deployment
 
-  health_check_grace_period_seconds = var.health_check_grace_period_seconds
+  health_check_grace_period_seconds = var.enable_loadbalancer ? var.health_check_grace_period_seconds : null
   platform_version = var.platform_version
 
   network_configuration {
