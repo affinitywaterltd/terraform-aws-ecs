@@ -4,7 +4,7 @@ data "aws_subnet" "this" {
 
 resource "aws_lb_target_group" "this" {
   count = var.create_lb_target_group ? length(var.task_names) : 0
-  name     = "${var.task_names[count.index]}-${var.environment_name}"
+  name     = "${substr(var.task_names[count.index],0,28)}-${var.environment_name}"
   port     = var.container_port
   protocol = var.protocol
   target_type = var.target_type
