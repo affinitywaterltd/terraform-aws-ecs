@@ -17,7 +17,7 @@ resource "aws_ecr_repository" "this" {
 }
 
 resource "aws_ecr_repository_policy" "allow_all" {
-  count = var.create_ecs && length(var.ecr_cross_account_princpals) > 0 ? length(var.task_names) : 0
+  count = var.create_ecs && var.ecr_cross_account_princpals != "[]" ? length(var.task_names) : 0
 
   repository = aws_ecr_repository.this[count.index].name
 
